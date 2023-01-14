@@ -1,14 +1,14 @@
 // index.js
 
-const { createServer } = require("http");
-const { Server } = require('socket.io')
 const delay = require('delay')
 const express = require('express')
 const app = express()
 
-const PORT = 3000
-const server = createServer()
+const http = require('http')
+const server = http.createServer(app)
+const { Server } = require('socket.io')
 
+const PORT = 3000
 const io = new Server(server)
 
 app.get('/', (req, res) => {
@@ -31,12 +31,12 @@ async function broadcastPrize() {
     
     while(true) {
         // const prize = await getPrize();
-        const prize = 31750 + Math.random() * 400;
+        const prize = 30000 + Math.random() * 400;
         io.emit('new-price', {
             price: parseFloat(prize.toFixed(2))
         })
 
-        await delay(3000)
+        await delay(1000)
     }
 
 }
