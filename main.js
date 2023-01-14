@@ -8,11 +8,13 @@ const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 
-const PORT = 3000
+const port = process.env.PORT || 3000;
 const io = new Server(server)
 
+app.use(express.static(__dirname + '/' + 'html'));
+
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/' + 'html/index.html')
 })
 
 io.on('connection', (socket) => {
@@ -23,8 +25,8 @@ io.on('connection', (socket) => {
     })
 })
 
-server.listen(PORT, () => {
-    console.log('listening on port ' + PORT)
+server.listen(port, () => {
+    console.log('listening on port ' + port)
 })
 
 async function broadcastPrize() {

@@ -6,13 +6,13 @@
     "node": "19.4.0",
     "npm": "9.2.0"
   },
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "tuan.pham",
   "license": "ISC",
   "dependencies": {
     "delay": "^5.0.0",
