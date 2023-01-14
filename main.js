@@ -43,4 +43,4 @@ async function broadcastPrize() {
 
 }
 
-broadcastPrize()
+// broadcastPrize()

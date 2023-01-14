@@ -1,6 +1,8 @@
 const socket = io();
 
-const name = prompt('Tell me your name:')
+let username, message;
+
+username = prompt('What is your name:')
 
 const chatForm = document.querySelector('#chat-form');
 const chatMes = document.querySelector('#chat-mes');
@@ -11,11 +13,18 @@ chatForm.addEventListener('submit', (e) => {
     const message = chatMes.value.trim();
 
     if (message != '') {
-        socket.emit('on-chat', {
-            name, message
-        });
-        
-        chatMes.value = '';
+
+        if (username == null || username == "") {
+            username = prompt('You have to input your name:')
+        }
+        if (username == null || username == '') {
+            alert("You have to input your name to start chatting");
+        } else {
+            socket.emit('on-chat', {
+                username, message
+            });
+            chatMes.value = '';
+        }
     }
 })
 
@@ -24,7 +33,7 @@ socket.on('user-chat', (data) => {
     console.log(data)
     const chatItem = document.createElement('li');
     
-    chatItem.textContent = `${data.name}: ${data.message}`;
+    chatItem.textContent = `${data.username}: ${data.message}`;
     messages.appendChild(chatItem);
 })
 
