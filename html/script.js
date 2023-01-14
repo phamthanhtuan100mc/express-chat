@@ -15,7 +15,7 @@ chatForm.addEventListener('submit', (e) => {
     if (message != '') {
 
         if (username == null || username == "") {
-            username = prompt('You have to input your name:')
+            username = prompt('Input your name:')
         }
         if (username == null || username == '') {
             alert("You have to input your name to start chatting");
