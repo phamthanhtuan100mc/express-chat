@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with socket.io</title>
+    <title>Express chat</title>
     <link rel="icon" type="image/x-icon" href="./resource/favicon.ico">
     <link rel="stylesheet" type="text/css" href="./style.css" >
 </head>
 <body>
-    <h1>App chat by NodeJS and Socket.io</h1>
+    <h2>App chat by NodeJS and Socket.io</h1>
+    <hr>
+    <div class="element">
+    </div>
+    <div class="element">
+    </div>
+    <div>
+        <!-- <div>
+            <p>Room name:</p>
+            <input type="text" id="room-name" value="Default">
+            <button id="change-room-name">Change</button>
+        </div> -->
+        <p>People in room: <span id="people-count">0</span></p>
+    </div>
+    <hr>
     <ul id="messages-content"></ul>
     <form id="chat-form">
         <input type="text" id="chat-mes">

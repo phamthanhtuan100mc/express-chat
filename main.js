@@ -11,6 +11,8 @@ const { Server } = require('socket.io')
 const port = process.env.PORT || 3000;
 const io = new Server(server)
 
+let people_count = 0;
+
 app.use(express.static(__dirname + '/' + 'html'));
 
 app.get('/', (req, res) => {
@@ -18,11 +20,29 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', (socket) => {
-    console.log('user connected')
+    people_count++;
+    io.emit('member-add', {
+        people_count
+    });
+    console.log(`user connected - ${people_count} client(s) joined`)
+
     socket.on('on-chat', data => {
-        // console.log({data})
+        console.log({data})
         io.emit('user-chat', data)
     })
+
+    socket.on("disconnect", (reason) => {
+        // ...
+        console.log('user leave')
+        console.log({ reason })
+
+        people_count--;
+
+        io.emit('member-add', {
+            people_count
+        });
+    });
+    
 })
 
 server.listen(port, () => {

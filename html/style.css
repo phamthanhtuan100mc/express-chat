@@ -2,7 +2,11 @@ body {
     align-items: center;
 }
 
-h1 {
+.wrapper {
+    display: inline-block;
+}
+
+h2 {
     color: palevioletred;
 }
 

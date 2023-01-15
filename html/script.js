@@ -1,7 +1,8 @@
 const socket = io();
 
-let username, message;
+let username, message, people;
 
+people = 0;
 username = prompt('What is your name:')
 
 const chatForm = document.querySelector('#chat-form');
@@ -26,6 +27,11 @@ chatForm.addEventListener('submit', (e) => {
             chatMes.value = '';
         }
     }
+})
+
+const people_count = document.querySelector('#people-count');
+socket.on('member-add', (data) => {
+    people_count.textContent = data.people_count;
 })
 
 const messages = document.querySelector('#messages-content')
