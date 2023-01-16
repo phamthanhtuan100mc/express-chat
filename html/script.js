@@ -1,17 +1,49 @@
 const socket = io();
 
-let username, message, people;
+let username;
+let people = 0;
 
-people = 0;
-username = prompt('What is your name:')
+username = prompt('What is your name:');
 
-const chatForm = document.querySelector('#chat-form');
-const chatMes = document.querySelector('#chat-mes');
+socket.on('member-add', (data) => {
+    people = data.people_count;
+    $('#people-count').val(people);
+    
+    setNameIfEmpty();
+    
+    $('#user-name').val(username);
+})
 
-chatForm.addEventListener('submit', (e) => {
+
+$('#edit-name').on('click', () => {
+
+    if ($('#edit-name').text() == 'Edit') {
+        $('#user-name').prop('disabled', false);
+        $('#edit-name').html('Set');
+
+        $('#section-name').append('<button id="cancel-edit">Cancel</button>');
+
+        $('#cancel-edit').on('click', () => {
+            $('#user-name').prop('disabled', true);
+            $('#user-name').val(username);
+            $('#cancel-edit').remove();
+            $('#edit-name').html('Edit');
+        })
+        
+    } else {
+        $('#user-name').prop('disabled', true);
+        username = $('#user-name').val();
+        $('#cancel-edit').remove();
+        $('#edit-name').html('Edit');
+    }
+})
+
+
+
+$('#chat-form').on('submit', (e) => {
     e.preventDefault();
 
-    const message = chatMes.value.trim();
+    const message = $('#chat-mes').val().trim();
 
     if (message != '') {
 
@@ -24,34 +56,25 @@ chatForm.addEventListener('submit', (e) => {
             socket.emit('on-chat', {
                 username, message
             });
-            chatMes.value = '';
+            $('#chat-mes').val('');
         }
     }
 })
 
-const people_count = document.querySelector('#people-count');
-socket.on('member-add', (data) => {
-    people_count.textContent = data.people_count;
-})
 
-const messages = document.querySelector('#messages-content')
+
 socket.on('user-chat', (data) => {
     console.log(data)
     const chatItem = document.createElement('li');
     
     chatItem.textContent = `${data.username}: ${data.message}`;
-    messages.appendChild(chatItem);
+    $('#messages-content').append(chatItem)
 })
 
-let lastPrice = 0;
-const priceSpan = document.querySelector('#price');
-socket.on('new-price', (data) => {
-
-    if (data.price > lastPrice) {
-        priceSpan.className = 'up';
-    } else {
-        priceSpan.className = 'down';
+function setNameIfEmpty () {
+    if (username === null || username === '') {
+        username = 'Default ' + people;
     }
-    lastPrice = data.price;
-    priceSpan.textContent = `${data.price}`;
-})
+
+    console.log('username: ' + username)
+}

@@ -2,14 +2,19 @@ body {
     align-items: center;
 }
 
-.wrapper {
-    display: inline-block;
+div.container {
+    display: flex;
 }
 
-h2 {
+div.child {
+    flex: 1;
+}
+
+h1 {
     color: palevioletred;
 }
 
+/* setting color up down with red - green color*/
 .up {
     color: green;
 }

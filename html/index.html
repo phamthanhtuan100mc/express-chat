@@ -9,19 +9,28 @@
     <link rel="stylesheet" type="text/css" href="./style.css" >
 </head>
 <body>
-    <h2>Express-chat</h1>
+    <h1>Express-chat</h1>
     <hr>
     <div class="element">
     </div>
     <div class="element">
     </div>
     <div>
-        <!-- <div>
-            <p>Room name:</p>
-            <input type="text" id="room-name" value="Default">
-            <button id="change-room-name">Change</button>
-        </div> -->
-        <p>People in room: <span id="people-count">0</span></p>
+        <div class="container">
+            <div class="child">
+                Room name:
+                <input type="text" id="room-name" value="Default room">
+                <button id="change-room-name">Change</button>
+            </div>
+            People in room:&nbsp;<span id="people-count">0</span>
+        </div>
+        <hr>
+        <div id="section-name">
+            Your name: 
+            <input type="text" id="user-name" disabled>
+            <button id="edit-name">Edit</button>
+            
+        </div>
     </div>
     <hr>
     <ul id="messages-content"></ul>
@@ -33,6 +42,7 @@
     <!-- <p>Random number: <span id="price" class="down">0</span></p> -->
 </body>
 
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="./script.js"></script>
 
