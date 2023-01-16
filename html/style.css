@@ -22,3 +22,7 @@ h1 {
 .down {
     color: red;
 }
+
+.no-bullet {
+    list-style-type: none;
+}

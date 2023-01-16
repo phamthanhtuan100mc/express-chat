@@ -71,8 +71,14 @@ $('#chat-form').on('submit', (e) => {
 socket.on('user-chat', (data) => {
     console.log(data)
     const chatItem = document.createElement('li');
-    
-    chatItem.textContent = `${data.username}: ${data.message}`;
+    chatItem.className = 'no-bullet';
+
+    if (data.username == username) {
+        chatItem.style.textAlign = 'right';
+        chatItem.style.color = 'deeppink';
+    }
+
+    chatItem.textContent = `${data.message}`;
     $('#messages-content').append(chatItem)
 })
 
