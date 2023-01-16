@@ -7,7 +7,8 @@ username = prompt('What is your name:');
 
 socket.on('member-add', (data) => {
     people = data.people_count;
-    $('#people-count').val(people);
+    console.log(people)
+    $('#people-count').html(people);
     
     setNameIfEmpty();
     
