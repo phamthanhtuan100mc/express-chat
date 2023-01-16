@@ -8,6 +8,7 @@
   },
   "main": "main.js",
   "scripts": {
+    "push_all": "git add . && git commit -m \"auto push all\" && git push",
     "start": "nodemon main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -95,4 +95,5 @@ function editComlete() {
     username = $('#user-name').val();
     $('#cancel-edit').remove();
     $('#edit-name').html('Edit');
+    editFlag = 0;
 }
