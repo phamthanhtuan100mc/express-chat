@@ -2,6 +2,7 @@ const socket = io();
 
 let username;
 let people = 0;
+let editFlag = 0;
 
 username = prompt('What is your name:');
 
@@ -21,6 +22,8 @@ $('#edit-name').on('click', () => {
     if ($('#edit-name').text() == 'Edit') {
         $('#user-name').prop('disabled', false);
         $('#edit-name').html('Set');
+        $('#user-name').focus();
+        editFlag = 1;
 
         $('#section-name').append('<button id="cancel-edit">Cancel</button>');
 
@@ -32,14 +35,15 @@ $('#edit-name').on('click', () => {
         })
         
     } else {
-        $('#user-name').prop('disabled', true);
-        username = $('#user-name').val();
-        $('#cancel-edit').remove();
-        $('#edit-name').html('Edit');
+        editComlete();
     }
 })
 
-
+$('#user-name').keypress(function(event) {
+    if (event.keyCode == 13 && editFlag == 1) {
+        editComlete();
+    }
+});
 
 $('#chat-form').on('submit', (e) => {
     e.preventDefault();
@@ -78,4 +82,11 @@ function setNameIfEmpty () {
     }
 
     console.log('username: ' + username)
+}
+
+function editComlete() {
+    $('#user-name').prop('disabled', true);
+    username = $('#user-name').val();
+    $('#cancel-edit').remove();
+    $('#edit-name').html('Edit');
 }
