@@ -72,14 +72,17 @@ socket.on('user-chat', (data) => {
     console.log(data)
     const chatItem = document.createElement('li');
     chatItem.className = 'no-bullet';
-
+    
     if (data.username == username) {
         chatItem.style.textAlign = 'right';
         chatItem.style.color = 'deeppink';
+        chatItem.style.marginRight = '4em';
+        chatItem.textContent = `${data.message}`;
+    } else {
+        chatItem.textContent = `${data.username}: ${data.message}`;
     }
 
-    chatItem.textContent = `${data.message}`;
-    $('#messages-content').append(chatItem)
+    $('#messages-content').append(chatItem);
 })
 
 function setNameIfEmpty () {
@@ -87,7 +90,7 @@ function setNameIfEmpty () {
         username = 'Default ' + people;
     }
 
-    console.log('username: ' + username)
+    console.log('set username: ' + username)
 }
 
 function editComlete() {
