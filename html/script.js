@@ -16,7 +16,6 @@ socket.on('member-add', (data) => {
     $('#user-name').val(username);
 })
 
-
 $('#edit-name').on('click', () => {
 
     if ($('#edit-name').text() == 'Edit') {
@@ -65,8 +64,6 @@ $('#chat-form').on('submit', (e) => {
         }
     }
 })
-
-
 
 socket.on('user-chat', (data) => {
     console.log(data)
